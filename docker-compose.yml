@@ -1,0 +1,21 @@
+backend:
+  build: ./backend
+  command: npm start
+  volumes:
+    - .:/weatherapp_backend
+  ports:
+    - "9000:9000"
+  environment:
+    PORT: 9000
+frontend:
+  build: ./frontend
+  command: npm start
+  volumes:
+    - .:/weatherapp_frontend
+  ports:
+    - "8000:8000"
+  links:
+    - backend
+  environment:
+    PORT: 8000
+    ENDPOINT: http://192.168.99.100:9000/api
